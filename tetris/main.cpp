@@ -150,7 +150,7 @@ public:
 
 	void update(PlayField &p, Tetri &t) {
 		Uint64 tick = SDL_GetTicks();
-
+		buildscr();
 		drawplayfield(p);
 		drawtetri(t);
 		SDL_RenderPresent(ren);
@@ -302,7 +302,7 @@ int main(int argc, char **argv){
 	while (quit == false) {
 
 		r.update(p, *t);
-		SDL_Delay(10);
+		SDL_Delay(15);
 
 		if (SDL_PollEvent(&e) == 1) {
 			switch (e.type) {
