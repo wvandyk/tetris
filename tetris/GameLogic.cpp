@@ -59,3 +59,60 @@ bool GameLogic::addBlock(PlayField &p, Tetri &block) {
 	}
 	return true;
 };
+
+void GameLogic::moveBlockLeft(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	block.set_x(t_x - 1);
+	if (!adjustFit(p, block)) {
+		block.set_x(t_x);
+		block.set_y(t_y);
+	}
+};
+
+void GameLogic::moveBlockRight(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	block.set_x(t_x + 1);
+	if (!adjustFit(p, block)) {
+		block.set_x(t_x);
+		block.set_y(t_y);
+	}
+};
+
+void GameLogic::moveBlockDown(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	block.set_y(t_y + 1);
+	if (!adjustFit(p, block)) {
+		block.set_x(t_x);
+		block.set_y(t_y);
+	}
+};
+
+void GameLogic::RotateBlockCW(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	block.rotateCW();
+	if (!adjustFit(p, block)) {
+		block.rotateCCW();
+		block.set_x(t_x);
+		block.set_y(t_y);
+	}
+};
+
+void GameLogic::RotateBlockCCW(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	block.rotateCCW();
+	if (!adjustFit(p, block)) {
+		block.rotateCW();
+		block.set_x(t_x);
+		block.set_y(t_y);
+	}
+};

@@ -201,10 +201,43 @@ public:
 	};
 };
 
+class Iblock : public Tetri {
+
+public:
+	Iblock() {
+		frames.resize(4);
+		frames[0].resize(16);
+		frames[0] = {
+			0, 1, 0, 0,
+			0, 1, 0, 0,
+			0, 1, 0, 0,
+			0, 1, 0, 0 };
+		frames[1].resize(16);
+		frames[1] = {
+			0, 0, 0, 0,
+			1, 1, 1, 1,
+			0, 0, 0, 0,
+			0, 0, 0, 0 };
+		frames[2].resize(16);
+		frames[2] = {
+			0, 0, 1, 0,
+			0, 0, 1, 0,
+			0, 0, 1, 0,
+			0, 0, 1, 0 };
+		frames[3].resize(16);
+		frames[3] = {
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			1, 1, 1, 1,
+			0, 0, 0, 0 };
+		color = "cyan";
+	};
+};
+
 int main(int argc, char **argv){
 
 
-	Lblock *t = new Lblock();
+	Tetri *t = new Lblock();
 	Renderer r;
 	PlayField p;
 	GameLogic l;
@@ -257,18 +290,60 @@ int main(int argc, char **argv){
 		std::cout << "doesnt fit" << std::endl;
 	};
 
+	delete t;
+	t = new Iblock();
+
 	t->set_x(0);
 	t->set_y(1);
-	r.update(p, *t);
-	std::cout << r.getFrameLenth() << std::endl;
 
-	SDL_Delay(2000);
+	SDL_Event e;
+	bool quit = false;
 
-	t->set_y(2);
-	r.update(p, *t);
-	SDL_Delay(2000);
+	while (quit == false) {
 
-	std::cout << r.getFrameLenth() << std::endl;
+		r.update(p, *t);
+		SDL_Delay(10);
+
+		if (SDL_PollEvent(&e) == 1) {
+			switch (e.type) {
+			case SDL_KEYDOWN:
+				switch (e.key.keysym.sym) {
+				case SDLK_ESCAPE:
+					quit = true;
+					break;
+				case SDLK_LEFT:
+					l.moveBlockLeft(p, *t);
+					break;
+				case SDLK_RIGHT:
+					l.moveBlockRight(p, *t);
+					break;
+				case SDLK_DOWN:
+					l.moveBlockDown(p, *t);
+					break;
+				case SDLK_a:
+					l.RotateBlockCCW(p, *t);
+					break;
+				case SDLK_d:
+					l.RotateBlockCW(p, *t);
+					break;
+				}
+				break;
+			}
+		}
+	}
+	
+
+
+	//r.update(p, *t);
+	//std::cout << r.getFrameLenth() << std::endl;
+
+	//SDL_Delay(2000);
+
+	//t->set_y(2);
+	//r.update(p, *t);
+	//SDL_Delay(2000);
+
+	//std::cout << r.getFrameLenth() << std::endl;
 
 
 	delete t;
