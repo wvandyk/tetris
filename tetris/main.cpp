@@ -168,71 +168,8 @@ public:
 };
 
 
-class Lblock : public Tetri {
 
-public:
-	Lblock() {
-		frames.resize(4);
-		frames[0].resize(16);
-		frames[0] = {
-			0, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 3, 3, 0,
-			0, 0, 0, 0 };
-		frames[1].resize(16);
-		frames[1] = {
-			0, 0, 0, 0,
-			3, 3, 3, 0,
-			3, 0, 0, 0,
-			0, 0, 0, 0 };
-		frames[2].resize(16);
-		frames[2] = {
-			3, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 0, 0, 0 };
-		frames[3].resize(16);
-		frames[3] = {
-			0, 0, 3, 0,
-			3, 3, 3, 0,
-			0, 0, 0, 0,
-			0, 0, 0, 0 };
-		color = "orange";
-	};
-};
 
-class Iblock : public Tetri {
-
-public:
-	Iblock() {
-		frames.resize(4);
-		frames[0].resize(16);
-		frames[0] = {
-			0, 1, 0, 0,
-			0, 1, 0, 0,
-			0, 1, 0, 0,
-			0, 1, 0, 0 };
-		frames[1].resize(16);
-		frames[1] = {
-			0, 0, 0, 0,
-			1, 1, 1, 1,
-			0, 0, 0, 0,
-			0, 0, 0, 0 };
-		frames[2].resize(16);
-		frames[2] = {
-			0, 0, 1, 0,
-			0, 0, 1, 0,
-			0, 0, 1, 0,
-			0, 0, 1, 0 };
-		frames[3].resize(16);
-		frames[3] = {
-			0, 0, 0, 0,
-			0, 0, 0, 0,
-			1, 1, 1, 1,
-			0, 0, 0, 0 };
-		color = "cyan";
-	};
-};
 
 int main(int argc, char **argv){
 
@@ -291,7 +228,7 @@ int main(int argc, char **argv){
 	};
 
 	delete t;
-	t = new Iblock();
+	t = new Jblock();
 
 	t->set_x(0);
 	t->set_y(1);
@@ -301,7 +238,13 @@ int main(int argc, char **argv){
 
 	while (quit == false) {
 
+		l.GravityBlockDown(p, *t);
 		r.update(p, *t);
+		if (t->getLocked()) {
+			l.addBlock(p, *t);
+			delete t;
+			t = new Tblock();
+		}
 		SDL_Delay(15);
 
 		if (SDL_PollEvent(&e) == 1) {
@@ -325,6 +268,9 @@ int main(int argc, char **argv){
 					break;
 				case SDLK_d:
 					l.RotateBlockCW(p, *t);
+					break;
+				case SDLK_f:
+					std::cout << r.getFrameLenth() << std::endl;
 					break;
 				}
 				break;

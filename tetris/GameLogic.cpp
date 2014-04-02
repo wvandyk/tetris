@@ -1,5 +1,11 @@
 #include "GameLogic.h"
 
+GameLogic::GameLogic() {
+	lockTimeOut = 1600;
+	dropTimeout = 800;
+	lastDrop = 0;
+}
+
 bool GameLogic::adjustFit(PlayField &board, Tetri &block) {
 	int original_x = block.get_x();
 	int original_y = block.get_y();
@@ -116,3 +122,26 @@ void GameLogic::RotateBlockCCW(PlayField &p, Tetri &block) {
 		block.set_y(t_y);
 	}
 };
+
+void GameLogic::GravityBlockDown(PlayField &p, Tetri &block) {
+	int t_x = block.get_x();
+	int t_y = block.get_y();
+
+	if (SDL_GetTicks() - lastDrop >= dropTimeout) {
+		block.set_y(t_y + 1);
+		lastDrop = SDL_GetTicks();
+
+		if (!adjustFit(p, block)) {
+			block.set_y(t_y);
+			block.set_x(t_x);
+			if (block.getLockTimer() == 0) {
+				block.setLockTimer(SDL_GetTicks());
+			}
+			else {
+				if (SDL_GetTicks() - block.getLockTimer() >= lockTimeOut) {
+					block.setLocked(true);
+				}
+			}
+		}
+	}
+}
