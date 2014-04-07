@@ -14,14 +14,16 @@ GameLogic::GameLogic() {
 
 void GameLogic::clearLines(PlayField &p) {
 	int lcount = 0;
+	int cleared = 0;
 
-	for (int y = 0; y < 20; y++) {
+	for (int y = 0; y < 22; y++) {
 		for (int x = 0; x < 10; x++) {
 			if (p.getBoardAt(x, y) != 0) {
 				lcount++;
 			}
 		}
 		if (lcount == 10) {
+			cleared++;
 			for (int x = 0; x < 10; x++) {
 				p.setBoardAt(x, y, 0);
 			}
@@ -33,6 +35,20 @@ void GameLogic::clearLines(PlayField &p) {
 			}
 		}
 		lcount = 0;
+	}
+	switch (cleared) {
+	case 1:
+		std::cout << "Single!" << std::endl;
+		break;
+	case 2:
+		std::cout << "Double!" << std::endl;
+		break;
+	case 3:
+		std::cout << "Triple!" << std::endl;
+		break;
+	case 4:
+		std::cout << "TETRIS!" << std::endl;
+		break;
 	}
 }
 

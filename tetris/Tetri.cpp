@@ -112,7 +112,7 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0 };
 		color = "orange";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Iblock::Iblock() {
@@ -144,7 +144,7 @@ bool Tetri::getLocked(void) {
 
 		color = "cyan";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Jblock::Jblock() {
@@ -176,7 +176,7 @@ bool Tetri::getLocked(void) {
 
 		color = "blue";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Oblock::Oblock() {
@@ -207,7 +207,7 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0 };
 		color = "yellow";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Sblock::Sblock() {
@@ -238,7 +238,7 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0 };
 		color = "green";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Tblock::Tblock() {
@@ -269,7 +269,7 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0 };
 		color = "violet";
 		x = 3;
-		y = -1;
+		y = 0;
 	};
 
 	Zblock::Zblock() {
@@ -300,5 +300,5 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0 };
 		color = "red";
 		x = 3;
-		y = -1;
+		y = 0;
 	};

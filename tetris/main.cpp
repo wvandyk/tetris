@@ -92,7 +92,6 @@ public:
 	}
 
 	void buildscr(void) {
-		SDL_RenderClear(ren);
 		for (int y = 0; y < 24; y++) {
 			for (int x = 0; x < 25; x++) {
 				SDL_Rect t;
@@ -118,11 +117,11 @@ public:
 	}
 
 	void drawplayfield(PlayField &p) {
-		for (int y = 0; y < 20; y++) {
+		for (int y = 0; y < 22; y++) {
 			for (int x = 0; x < 10; x++) {
 				SDL_Rect t;
 				t.x = x * 32 + 64;
-				t.y = y * 32 + 64;
+				t.y = y * 32;
 				t.w = 32;
 				t.h = 32;
 				int index = p.getBoardAt(x, y) - 1;
@@ -137,7 +136,7 @@ public:
 			for (int x = 0; x < 4; x++) {
 				SDL_Rect r;
 				r.x = (t.get_x() + x) * 32 + 64;
-				r.y = (t.get_y() + y) * 32 + 64;
+				r.y = (t.get_y() + y) * 32;
 				r.w = 32;
 				r.h = 32;
 				int index = t.getFrame()[x + y * 4] - 1;
@@ -148,11 +147,26 @@ public:
 		}
 	}
 
+	void drawTopBorder() {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 25; x++) {
+				SDL_Rect t;
+				t.x = x * 32;
+				t.y = y * 32;
+				t.w = 32;
+				t.h = 32;
+				SDL_RenderCopy(ren, tex, &grect, &t);
+			}
+		}
+	}
+
 	void update(PlayField &p, Tetri &t) {
 		Uint64 tick = SDL_GetTicks();
+		SDL_RenderClear(ren);
 		buildscr();
 		drawplayfield(p);
 		drawtetri(t);
+		drawTopBorder();
 		SDL_RenderPresent(ren);
 
 		framelength = SDL_GetTicks() - tick;
@@ -196,7 +210,6 @@ int main(int argc, char **argv){
 			l.clearLines(p);
 			t = l.nextBlock();
 		}
-		SDL_Delay(15);
 
 		if (SDL_PollEvent(&e) == 1) {
 			switch (e.type) {
