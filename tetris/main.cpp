@@ -40,7 +40,7 @@ public:
 			return false;
 		}
 		
-		win = SDL_CreateWindow("Tetris", 100, 100, 800, 768,
+		win = SDL_CreateWindow("Tetris", 400, 100, 800, 768,
 			SDL_WINDOW_SHOWN);
 		if (win == nullptr){
 			std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -174,64 +174,14 @@ public:
 int main(int argc, char **argv){
 
 
-	Tetri *t = new Lblock();
+	Tetri *t = NULL;
 	Renderer r;
 	PlayField p;
 	GameLogic l;
 
-	t->set_x(-1);
-	if (l.checkFit(p, *t)) {
-		std::cout << "block fits" << std::endl;
-	}
-	else 
-	{
-		std::cout << "doesnt fit" << std::endl;
-	};
+	std::cout << "Starting:" << std::endl;
 
-	t->set_x(15);
-	t->set_y(20);
-
-	if (l.checkFit(p, *t)) {
-		std::cout << "block fits" << std::endl;
-	}
-	else
-	{
-		std::cout << "doesnt fit" << std::endl;
-	};
-
-	t->set_x(-1);
-	t->set_y(5);
-
-	if (l.checkFit(p, *t)) {
-		std::cout << "block fits" << std::endl;
-	}
-	else
-	{
-		std::cout << "doesnt fit" << std::endl;
-	};
-
-	p.drawBoard();
-	std::cout << "GOT HERE" << std::endl;
-	t->set_x(14);
-	if (l.adjustFit(p, *t)) {
-		l.addBlock(p, *t);
-	};
-	std::cout << "GOT HERE2" << std::endl;
-	p.drawBoard();
-
-	if (l.checkFit(p, *t)) {
-		std::cout << "block fits" << std::endl;
-	}
-	else
-	{
-		std::cout << "doesnt fit" << std::endl;
-	};
-
-	delete t;
-	t = new Jblock();
-
-	t->set_x(0);
-	t->set_y(1);
+	t = l.nextBlock();
 
 	SDL_Event e;
 	bool quit = false;
@@ -243,7 +193,8 @@ int main(int argc, char **argv){
 		if (t->getLocked()) {
 			l.addBlock(p, *t);
 			delete t;
-			t = new Tblock();
+			l.clearLines(p);
+			t = l.nextBlock();
 		}
 		SDL_Delay(15);
 

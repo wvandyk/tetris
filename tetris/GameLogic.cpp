@@ -1,9 +1,79 @@
 #include "GameLogic.h"
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 
 GameLogic::GameLogic() {
 	lockTimeOut = 1600;
 	dropTimeout = 800;
 	lastDrop = 0;
+	blockbag.reserve(7);
+	blockbag = { 1, 2, 3, 4, 5, 6, 7 };
+	std::srand(std::time(NULL));
+}
+
+void GameLogic::clearLines(PlayField &p) {
+	int lcount = 0;
+
+	for (int y = 0; y < 20; y++) {
+		for (int x = 0; x < 10; x++) {
+			if (p.getBoardAt(x, y) != 0) {
+				lcount++;
+			}
+		}
+		if (lcount == 10) {
+			for (int x = 0; x < 10; x++) {
+				p.setBoardAt(x, y, 0);
+			}
+			for (int yy = y; yy > 0; yy--) {
+				for (int xx = 0; xx < 10; xx++) {
+					int tv = p.getBoardAt(xx, yy - 1);
+					p.setBoardAt(xx, yy, tv);
+				}
+			}
+		}
+		lcount = 0;
+	}
+}
+
+Tetri *GameLogic::nextBlock(void) {
+	Tetri *nextpiece;
+	int r = std::rand() % blockbag.size();
+	int piece = blockbag[r];
+	blockbag.erase(blockbag.begin() + r);
+	
+	if (blockbag.size() == 0) {
+		blockbag = { 1, 2, 3, 4, 5, 6, 7 };
+	}
+
+	switch (piece) {
+	case 1:
+		nextpiece = new Iblock();
+		break;
+	case 2:
+		nextpiece = new Lblock();
+		break;
+	case 3:
+		nextpiece = new Jblock();
+		break;
+	case 4:
+		nextpiece = new Oblock();
+		break;
+	case 5:
+		nextpiece = new Sblock();
+		break;
+	case 6:
+		nextpiece = new Tblock();
+		break;
+	case 7:
+		nextpiece = new Zblock();
+		break;
+	default:
+		nextpiece = NULL;
+		break;
+	}
+
+	return nextpiece;
 }
 
 bool GameLogic::adjustFit(PlayField &board, Tetri &block) {
@@ -137,11 +207,16 @@ void GameLogic::GravityBlockDown(PlayField &p, Tetri &block) {
 			if (block.getLockTimer() == 0) {
 				block.setLockTimer(SDL_GetTicks());
 			}
-			else {
+			else 
+			{
 				if (SDL_GetTicks() - block.getLockTimer() >= lockTimeOut) {
 					block.setLocked(true);
 				}
 			}
+		}
+		else 
+		{
+			block.setLockTimer(0);
 		}
 	}
 }

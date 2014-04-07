@@ -8,6 +8,7 @@ private:
 	Uint64 lockTimeOut = 1600;
 	Uint64 dropTimeout = 800;
 	Uint64 lastDrop = 0;
+	std::vector<int> blockbag;
 public:
 	GameLogic();
 	bool adjustFit(PlayField &board, Tetri &block);
@@ -19,6 +20,8 @@ public:
 	void RotateBlockCW(PlayField &p, Tetri &block);
 	void RotateBlockCCW(PlayField &p, Tetri &block);
 	void GravityBlockDown(PlayField &p, Tetri &block);
+	Tetri *nextBlock(void);
+	void clearLines(PlayField &p);
 };
 
 #endif

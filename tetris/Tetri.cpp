@@ -88,87 +88,95 @@ bool Tetri::getLocked(void) {
 		frames.resize(4);
 		frames[0].resize(16);
 		frames[0] = {
-			0, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 3, 3, 0,
-			0, 0, 0, 0 };
-		frames[1].resize(16);
-		frames[1] = {
-			0, 0, 0, 0,
-			3, 3, 3, 0,
-			3, 0, 0, 0,
-			0, 0, 0, 0 };
-		frames[2].resize(16);
-		frames[2] = {
-			3, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 3, 0, 0,
-			0, 0, 0, 0 };
-		frames[3].resize(16);
-		frames[3] = {
 			0, 0, 3, 0,
 			3, 3, 3, 0,
 			0, 0, 0, 0,
 			0, 0, 0, 0 };
+		frames[1].resize(16);
+		frames[1] = {
+			0, 3, 0, 0,
+			0, 3, 0, 0,
+			0, 3, 3, 0,
+			0, 0, 0, 0 };
+		frames[2].resize(16);
+		frames[2] = {
+			0, 0, 0, 0,
+			3, 3, 3, 0,
+			3, 0, 0, 0,
+			0, 0, 0, 0 };
+		frames[3].resize(16);
+		frames[3] = {
+			3, 3, 0, 0,
+			0, 3, 0, 0,
+			0, 3, 0, 0,
+			0, 0, 0, 0 };
 		color = "orange";
+		x = 3;
+		y = -1;
 	};
 
 	Iblock::Iblock() {
 		frames.resize(4);
 		frames[0].resize(16);
 		frames[0] = {
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			1, 1, 1, 1,
+			0, 0, 0, 0 };
+		frames[1].resize(16);
+		frames[1] = {
 			0, 1, 0, 0,
 			0, 1, 0, 0,
 			0, 1, 0, 0,
 			0, 1, 0, 0 };
-		frames[1].resize(16);
-		frames[1] = {
+		frames[2].resize(16);
+		frames[2] = {
 			0, 0, 0, 0,
 			1, 1, 1, 1,
 			0, 0, 0, 0,
 			0, 0, 0, 0 };
-		frames[2].resize(16);
-		frames[2] = {
+		frames[3].resize(16);
+		frames[3] = {
 			0, 0, 1, 0,
 			0, 0, 1, 0,
 			0, 0, 1, 0,
 			0, 0, 1, 0 };
-		frames[3].resize(16);
-		frames[3] = {
-			0, 0, 0, 0,
-			0, 0, 0, 0,
-			1, 1, 1, 1,
-			0, 0, 0, 0 };
+
 		color = "cyan";
+		x = 3;
+		y = -1;
 	};
 
 	Jblock::Jblock() {
 		frames.resize(4);
 		frames[0].resize(16);
 		frames[0] = {
-			0, 2, 0, 0,
-			0, 2, 0, 0,
-			2, 2, 0, 0,
-			0, 0, 0, 0 };
-		frames[1].resize(16);
-		frames[1] = {
 			2, 0, 0, 0,
 			2, 2, 2, 0,
 			0, 0, 0, 0,
 			0, 0, 0, 0 };
-		frames[2].resize(16);
-		frames[2] = {
+		frames[1].resize(16);
+		frames[1] = {
 			0, 2, 2, 0,
 			0, 2, 0, 0,
 			0, 2, 0, 0,
 			0, 0, 0, 0 };
-		frames[3].resize(16);
-		frames[3] = {
+		frames[2].resize(16);
+		frames[2] = {
 			0, 0, 0, 0,
 			2, 2, 2, 0,
 			0, 0, 2, 0,
 			0, 0, 0, 0 };
+		frames[3].resize(16);
+		frames[3] = {
+			0, 2, 0, 0,
+			0, 2, 0, 0,
+			2, 2, 0, 0,
+			0, 0, 0, 0 };
+
 		color = "blue";
+		x = 3;
+		y = -1;
 	};
 
 	Oblock::Oblock() {
@@ -198,6 +206,8 @@ bool Tetri::getLocked(void) {
 			0, 0, 0, 0,
 			0, 0, 0, 0 };
 		color = "yellow";
+		x = 3;
+		y = -1;
 	};
 
 	Sblock::Sblock() {
@@ -227,6 +237,8 @@ bool Tetri::getLocked(void) {
 			0, 5, 0, 0,
 			0, 0, 0, 0 };
 		color = "green";
+		x = 3;
+		y = -1;
 	};
 
 	Tblock::Tblock() {
@@ -256,6 +268,8 @@ bool Tetri::getLocked(void) {
 			0, 6, 0, 0,
 			0, 0, 0, 0 };
 		color = "violet";
+		x = 3;
+		y = -1;
 	};
 
 	Zblock::Zblock() {
@@ -285,4 +299,6 @@ bool Tetri::getLocked(void) {
 			7, 0, 0, 0,
 			0, 0, 0, 0 };
 		color = "red";
+		x = 3;
+		y = -1;
 	};
