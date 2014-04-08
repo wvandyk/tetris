@@ -4,8 +4,8 @@
 #include <ctime>
 
 GameLogic::GameLogic() {
-	lockTimeOut = 1600;
-	dropTimeout = 800;
+	lockTimeOut = 800;
+	dropTimeout = 400;
 	lastDrop = 0;
 	blockbag.reserve(7);
 	blockbag = { 1, 2, 3, 4, 5, 6, 7 };
@@ -107,12 +107,36 @@ bool GameLogic::adjustFit(PlayField &board, Tetri &block) {
 		}
 	}
 	if (!checkFit(board, block)) {
-		block.set_x(original_x);
 		block.set_y(original_y);
+		block.set_x(original_x);
 		return false;
-	};
+	}
 	return true;
 };
+
+bool GameLogic::kickFit(PlayField &board, Tetri &block) {
+	int original_x = block.get_x();
+	int original_y = block.get_y();
+
+	if (!checkFit(board, block)) {
+		block.set_y(original_y);
+		block.set_x(original_x + 1);
+		if (!checkFit(board, block)) {
+			block.set_x(original_x - 1);
+			if (!checkFit(board, block)) {
+				block.set_x(original_x);
+				return false;
+			}
+			return true;
+		}
+		else
+		{
+			return true;
+		}
+		block.set_x(original_x);
+		return false;
+	}
+}
 
 bool GameLogic::checkFit(PlayField &p, Tetri &block) {
 	int *frame = block.getFrame();

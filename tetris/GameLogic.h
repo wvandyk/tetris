@@ -12,6 +12,7 @@ private:
 public:
 	GameLogic();
 	bool adjustFit(PlayField &board, Tetri &block);
+	bool kickFit(PlayField &board, Tetri &block);
 	bool checkFit(PlayField &p, Tetri &block);
 	bool addBlock(PlayField &p, Tetri &block);
 	void moveBlockLeft(PlayField &p, Tetri &block);

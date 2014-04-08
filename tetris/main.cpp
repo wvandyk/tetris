@@ -220,18 +220,22 @@ int main(int argc, char **argv){
 					break;
 				case SDLK_LEFT:
 					l.moveBlockLeft(p, *t);
+					l.kickFit(p, *t);
 					break;
 				case SDLK_RIGHT:
 					l.moveBlockRight(p, *t);
+					l.kickFit(p, *t);
 					break;
 				case SDLK_DOWN:
 					l.moveBlockDown(p, *t);
 					break;
 				case SDLK_a:
 					l.RotateBlockCCW(p, *t);
+					l.kickFit(p, *t);
 					break;
 				case SDLK_d:
 					l.RotateBlockCW(p, *t);
+					l.kickFit(p, *t);
 					break;
 				case SDLK_f:
 					std::cout << r.getFrameLenth() << std::endl;
