@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayField.cpp" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="PlayField.h" />
     <ClInclude Include="Tetri.h" />
   </ItemGroup>

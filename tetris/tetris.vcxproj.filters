@@ -27,6 +27,9 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tetri.h">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

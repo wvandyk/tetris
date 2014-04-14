@@ -15,6 +15,7 @@ public:
 	bool checkInBounds(int x, int y);
 	bool boardEmptyAt(int x, int y);
 	void drawBoard(void);
+	void clearBoard(void);
 };
 
 #endif

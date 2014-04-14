@@ -12,7 +12,7 @@ GameLogic::GameLogic() {
 	std::srand(std::time(NULL));
 }
 
-void GameLogic::clearLines(PlayField &p) {
+int GameLogic::clearLines(PlayField &p) {
 	int lcount = 0;
 	int cleared = 0;
 
@@ -50,6 +50,7 @@ void GameLogic::clearLines(PlayField &p) {
 		std::cout << "TETRIS!" << std::endl;
 		break;
 	}
+	return cleared;
 }
 
 Tetri *GameLogic::nextBlock(void) {

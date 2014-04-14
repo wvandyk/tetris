@@ -6,7 +6,7 @@
 #include "PlayField.h"
 #include "Tetri.h"
 #include "GameLogic.h"
-
+#include "Animator.h"
 
 class Renderer {
 	SDL_Window *win;
@@ -132,6 +132,9 @@ public:
 	}
 
 	void drawtetri(Tetri &t) {
+		if (&t == NULL) {
+			return;
+		}
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
 				SDL_Rect r;
@@ -181,85 +184,110 @@ public:
 
 };
 
-
-
-
-
 int main(int argc, char **argv){
 
-
+	bool game_over = true;
 	Tetri *t = NULL;
 	Renderer r;
 	PlayField p;
 	GameLogic l;
+	int lines_cleared = 0;
+	std::vector<Animator *> animators{};
 
 	std::cout << "Starting:" << std::endl;
+	std::cout << "Animators size: " << animators.size() << std::endl;
 
+	
 	t = l.nextBlock();
-
 	SDL_Event e;
 	bool quit = false;
 
 	while (quit == false) {
-
-		l.GravityBlockDown(p, *t);
 		r.update(p, *t);
-		if (t->getLocked()) {
-			l.addBlock(p, *t);
-			delete t;
-			l.clearLines(p);
-			t = l.nextBlock();
-		}
 
-		if (SDL_PollEvent(&e) == 1) {
-			switch (e.type) {
-			case SDL_KEYDOWN:
-				switch (e.key.keysym.sym) {
-				case SDLK_ESCAPE:
-					quit = true;
-					break;
-				case SDLK_LEFT:
-					l.moveBlockLeft(p, *t);
-					l.kickFit(p, *t);
-					break;
-				case SDLK_RIGHT:
-					l.moveBlockRight(p, *t);
-					l.kickFit(p, *t);
-					break;
-				case SDLK_DOWN:
-					l.moveBlockDown(p, *t);
-					break;
-				case SDLK_a:
-					l.RotateBlockCCW(p, *t);
-					l.kickFit(p, *t);
-					break;
-				case SDLK_d:
-					l.RotateBlockCW(p, *t);
-					l.kickFit(p, *t);
-					break;
-				case SDLK_f:
-					std::cout << r.getFrameLenth() << std::endl;
+		if (!game_over) {
+			if (animators.size() > 0) {
+				for (int i = 0; i < animators.size(); i++) {
+					if (!(animators[i]->nextFrame())) {
+						delete animators[i];
+						animators.erase(animators.begin() + i);
+					}
+				}
+			}
+
+			
+			l.GravityBlockDown(p, *t);
+			
+			if (t->getLocked()) {
+				l.addBlock(p, *t);
+				if (t->get_y() <= 1) {
+					game_over = true;
+					p.clearBoard();
+				}
+				delete t;
+				lines_cleared = l.clearLines(p);
+				//if (lines_cleared > 0) {
+
+				//	for (int i = 0; i < (lines_cleared * 10); i++) {
+				//		animators.push_back(new Animator());
+				//	}
+				//}
+				t = l.nextBlock();
+			}
+
+
+			if (SDL_PollEvent(&e) == 1) {
+				switch (e.type) {
+				case SDL_KEYDOWN:
+					switch (e.key.keysym.sym) {
+					case SDLK_ESCAPE:
+						quit = true;
+						break;
+					case SDLK_LEFT:
+						l.moveBlockLeft(p, *t);
+						l.kickFit(p, *t);
+						break;
+					case SDLK_RIGHT:
+						l.moveBlockRight(p, *t);
+						l.kickFit(p, *t);
+						break;
+					case SDLK_DOWN:
+						l.moveBlockDown(p, *t);
+						break;
+					case SDLK_a:
+						l.RotateBlockCCW(p, *t);
+						l.kickFit(p, *t);
+						break;
+					case SDLK_d:
+						l.RotateBlockCW(p, *t);
+						l.kickFit(p, *t);
+						break;
+					case SDLK_f:
+						std::cout << r.getFrameLenth() << std::endl;
+						break;
+					}
 					break;
 				}
-				break;
+			}
+		}
+		else
+		{
+			if (SDL_PollEvent(&e) == 1) {
+				switch (e.type) {
+				case SDL_KEYDOWN:
+					switch (e.key.keysym.sym) {
+					case SDLK_ESCAPE:
+						quit = true;
+						break;
+					case SDLK_SPACE:
+						game_over = false;
+						break;
+					}
+				}
 			}
 		}
 	}
 	
-
-
-	//r.update(p, *t);
-	//std::cout << r.getFrameLenth() << std::endl;
-
-	//SDL_Delay(2000);
-
-	//t->set_y(2);
-	//r.update(p, *t);
-	//SDL_Delay(2000);
-
-	//std::cout << r.getFrameLenth() << std::endl;
-
-
 	delete t;
 	return 0;
 }

@@ -22,7 +22,7 @@ public:
 	void RotateBlockCCW(PlayField &p, Tetri &block);
 	void GravityBlockDown(PlayField &p, Tetri &block);
 	Tetri *nextBlock(void);
-	void clearLines(PlayField &p);
+	int clearLines(PlayField &p);
 };
 
 #endif

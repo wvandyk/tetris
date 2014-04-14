@@ -46,3 +46,11 @@ void PlayField::drawBoard(void) {
 		std::cout << std::endl;
 	}
 };
+
+void PlayField::clearBoard(void) {
+	for (int y = 0; y < 22; y++) {
+		for (int x = 0; x < 10; x++) {
+			board[x + y * 10] = 0;
+		}
+	}
+}

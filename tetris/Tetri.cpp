@@ -144,7 +144,7 @@ bool Tetri::getLocked(void) {
 
 		color = "cyan";
 		x = 3;
-		y = 0;
+		y = -1;
 	};
 
 	Jblock::Jblock() {
