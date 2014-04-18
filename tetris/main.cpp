@@ -7,6 +7,7 @@
 #include "Tetri.h"
 #include "GameLogic.h"
 #include "Animator.h"
+#include "BlockAnimator.h"
 
 class Renderer {
 	SDL_Window *win;
@@ -163,13 +164,31 @@ public:
 		}
 	}
 
-	void update(PlayField &p, Tetri &t) {
+	void renderAnimator(std::vector<Animator *> &animators) {
+		if (animators.size() > 0) {
+			int i = 0;
+			for (int i = 0; i < animators.size(); i++) {
+				SDL_Rect t;
+				t.x = ((BlockAnimator *)animators[i])->get_x();
+				t.y = ((BlockAnimator *)animators[i])->get_y();
+				t.w = ((BlockAnimator *)animators[i])->get_w();
+				t.h = ((BlockAnimator *)animators[i])->get_h();
+				int index = ((BlockAnimator *)animators[i])->get_block() - 1;
+				if (index >= 0) {
+					SDL_RenderCopy(ren, tex, blocks[index], &t);
+				}
+			}
+		}
+	}
+
+	void update(PlayField &p, Tetri &t, std::vector<Animator *> &animators) {
 		Uint64 tick = SDL_GetTicks();
 		SDL_RenderClear(ren);
 		buildscr();
 		drawplayfield(p);
 		drawtetri(t);
 		drawTopBorder();
+		renderAnimator(animators);
 		SDL_RenderPresent(ren);
 
 		framelength = SDL_GetTicks() - tick;
@@ -190,9 +209,9 @@ int main(int argc, char **argv){
 	Tetri *t = NULL;
 	Renderer r;
 	PlayField p;
-	GameLogic l;
-	int lines_cleared = 0;
 	std::vector<Animator *> animators{};
+	GameLogic l(animators);
+	int lines_cleared = 0;
 
 	std::cout << "Starting:" << std::endl;
 	std::cout << "Animators size: " << animators.size() << std::endl;
@@ -203,7 +222,7 @@ int main(int argc, char **argv){
 	bool quit = false;
 
 	while (quit == false) {
-		r.update(p, *t);
+		r.update(p, *t, animators);
 
 		if (!game_over) {
 			if (animators.size() > 0) {
@@ -226,12 +245,6 @@ int main(int argc, char **argv){
 				}
 				delete t;
 				lines_cleared = l.clearLines(p);
-				//if (lines_cleared > 0) {
-
-				//	for (int i = 0; i < (lines_cleared * 10); i++) {
-				//		animators.push_back(new Animator());
-				//	}
-				//}
 				t = l.nextBlock();
 			}
 

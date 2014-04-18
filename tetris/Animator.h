@@ -5,8 +5,11 @@ class Animator {
 	int frame = 0;
 	int frame_count = 10;
 public:
+
+
 	Animator();
-	bool nextFrame(void);
+	virtual bool nextFrame(void);
+	virtual ~Animator() {};
 };
 
 #endif

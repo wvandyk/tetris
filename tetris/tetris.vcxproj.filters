@@ -30,6 +30,9 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BlockAnimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tetri.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockAnimator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

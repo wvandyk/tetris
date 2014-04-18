@@ -1,15 +1,18 @@
 #include "GameLogic.h"
+#include "Animator.h"
+#include "BlockAnimator.h"
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 
-GameLogic::GameLogic() {
+GameLogic::GameLogic(std::vector<Animator *> &animlist) {
 	lockTimeOut = 800;
 	dropTimeout = 400;
 	lastDrop = 0;
 	blockbag.reserve(7);
 	blockbag = { 1, 2, 3, 4, 5, 6, 7 };
 	std::srand(std::time(NULL));
+	alist = &animlist;
 }
 
 int GameLogic::clearLines(PlayField &p) {
@@ -25,6 +28,7 @@ int GameLogic::clearLines(PlayField &p) {
 		if (lcount == 10) {
 			cleared++;
 			for (int x = 0; x < 10; x++) {
+				alist->push_back(new BlockAnimator(x * 32 + 64, y * 32, x * 32 + 64 + 31, y * 32 + 31, p.getBoardAt(x, y)));
 				p.setBoardAt(x, y, 0);
 			}
 			for (int yy = y; yy > 0; yy--) {
@@ -130,13 +134,9 @@ bool GameLogic::kickFit(PlayField &board, Tetri &block) {
 			}
 			return true;
 		}
-		else
-		{
-			return true;
-		}
 		block.set_x(original_x);
-		return false;
 	}
+	return false;
 }
 
 bool GameLogic::checkFit(PlayField &p, Tetri &block) {

@@ -2,6 +2,7 @@
 #define __GAMELOGIC__
 #include "PlayField.h"
 #include "Tetri.h"
+#include "Animator.h"
 
 class GameLogic {
 private:
@@ -9,8 +10,9 @@ private:
 	Uint64 dropTimeout = 800;
 	Uint64 lastDrop = 0;
 	std::vector<int> blockbag;
+	std::vector<Animator *> *alist;
 public:
-	GameLogic();
+	GameLogic(std::vector<Animator *> &animlist);
 	bool adjustFit(PlayField &board, Tetri &block);
 	bool kickFit(PlayField &board, Tetri &block);
 	bool checkFit(PlayField &p, Tetri &block);
