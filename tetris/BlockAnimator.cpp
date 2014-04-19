@@ -8,11 +8,13 @@ BlockAnimator::BlockAnimator(int x, int y, int x2, int y2, int block) {
 	this->x2 = x2 - centerx;
 	this->y2 = y2 - centery;
 	this->block = block;
+	std::cout << "TickTime: " << ticktime << std::endl;
 };
 
 bool BlockAnimator::nextFrame(void) {
-	if (SDL_GetTicks() - last_tick >= ticktime) {
-		last_tick = SDL_GetTicks();
+	Uint64 tick = SDL_GetTicks();
+	if (tick - last_tick >= ticktime) {
+		last_tick = tick;
 		if ((this->x + centerx <= 0) && (this->x2 + centerx <= 0) ||
 			(this->x + centerx >= 800) && (this->x2 + centerx >= 800) ||
 			(this->y + centery <= 0) && (this->y2 + centery <= 0) ||

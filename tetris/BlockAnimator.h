@@ -12,8 +12,8 @@ class BlockAnimator : public Animator {
 	int x2 = 0;
 	int y2 = 0;
 	int block = 0;
-	int ticktime = 15;
-	int last_tick = SDL_GetTicks();
+	Uint64 ticktime = 10;
+	Uint64 last_tick = SDL_GetTicks();
 
 public:
 	BlockAnimator(int x, int y, int x2, int y2, int block);

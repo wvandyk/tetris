@@ -40,6 +40,21 @@ int GameLogic::clearLines(PlayField &p) {
 		}
 		lcount = 0;
 	}
+	if (cleared > 0) {
+		lines_completed = lines_completed + cleared;
+		score = score + cleared * 100 * cleared * cleared;
+		lines_to_level = lines_to_level - cleared;
+		if (lines_to_level <= 0) {
+			level++;
+			lines_to_level = 10 + (level * 5);
+			dropTimeout = dropTimeout - 20;
+		}
+		std::cout << "Score: " << score << std::endl;
+		std::cout << "Level: " << level << std::endl;
+		std::cout << "Lines: " << lines_completed << std::endl;
+		std::cout << "Lines to Level: " << lines_to_level << std::endl;
+		std::cout << "droptimeout: " << dropTimeout << std::endl;
+	}
 	switch (cleared) {
 	case 1:
 		std::cout << "Single!" << std::endl;

@@ -9,6 +9,10 @@ private:
 	Uint64 lockTimeOut = 1600;
 	Uint64 dropTimeout = 800;
 	Uint64 lastDrop = 0;
+	Uint64 score = 0;
+	Uint64 lines_completed = 0;
+	int lines_to_level = 10;
+	Uint64 level = 0;
 	std::vector<int> blockbag;
 	std::vector<Animator *> *alist;
 public:
