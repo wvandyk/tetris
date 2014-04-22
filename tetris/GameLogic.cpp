@@ -7,12 +7,14 @@
 
 GameLogic::GameLogic(std::vector<Animator *> &animlist) {
 	lockTimeOut = 800;
-	dropTimeout = 400;
+	dropTimeout = 440;
 	lastDrop = 0;
 	blockbag.reserve(7);
 	blockbag = { 1, 2, 3, 4, 5, 6, 7 };
 	std::srand(std::time(NULL));
 	alist = &animlist;
+	nnextPiece = NULL;
+	nextPiece = drawPiece();
 }
 
 int GameLogic::clearLines(PlayField &p) {
@@ -42,12 +44,18 @@ int GameLogic::clearLines(PlayField &p) {
 	}
 	if (cleared > 0) {
 		lines_completed = lines_completed + cleared;
-		score = score + cleared * 100 * cleared * cleared;
+		score = score + (100 * cleared * cleared);
+		if (level > 0) {
+			score = score * level;
+		}
 		lines_to_level = lines_to_level - cleared;
 		if (lines_to_level <= 0) {
 			level++;
-			lines_to_level = 10 + (level * 5);
-			dropTimeout = dropTimeout - 20;
+			lines_to_level = 10 + (level * 2);
+			dropTimeout = dropTimeout - 40;
+			if (dropTimeout < 80) {
+				dropTimeout = 80;
+			}
 		}
 		std::cout << "Score: " << score << std::endl;
 		std::cout << "Level: " << level << std::endl;
@@ -72,8 +80,8 @@ int GameLogic::clearLines(PlayField &p) {
 	return cleared;
 }
 
-Tetri *GameLogic::nextBlock(void) {
-	Tetri *nextpiece;
+Tetri *GameLogic::drawPiece(void) {
+	Tetri *npiece;
 	int r = std::rand() % blockbag.size();
 	int piece = blockbag[r];
 	blockbag.erase(blockbag.begin() + r);
@@ -84,32 +92,44 @@ Tetri *GameLogic::nextBlock(void) {
 
 	switch (piece) {
 	case 1:
-		nextpiece = new Iblock();
+		npiece = new Iblock();
 		break;
 	case 2:
-		nextpiece = new Lblock();
+		npiece = new Lblock();
 		break;
 	case 3:
-		nextpiece = new Jblock();
+		npiece = new Jblock();
 		break;
 	case 4:
-		nextpiece = new Oblock();
+		npiece = new Oblock();
 		break;
 	case 5:
-		nextpiece = new Sblock();
+		npiece = new Sblock();
 		break;
 	case 6:
-		nextpiece = new Tblock();
+		npiece = new Tblock();
 		break;
 	case 7:
-		nextpiece = new Zblock();
+		npiece = new Zblock();
 		break;
 	default:
-		nextpiece = NULL;
+		npiece = NULL;
 		break;
 	}
 
-	return nextpiece;
+	return npiece;
+}
+
+Tetri *GameLogic::nextBlock(void) {
+	Tetri *rpiece = NULL;
+	rpiece = nextPiece;
+	nnextPiece = drawPiece();
+	nextPiece = nnextPiece;
+	return rpiece;
+}
+
+Tetri *GameLogic::getNextPiece(void) {
+	return nextPiece;
 }
 
 bool GameLogic::adjustFit(PlayField &board, Tetri &block) {
@@ -250,6 +270,9 @@ void GameLogic::RotateBlockCCW(PlayField &p, Tetri &block) {
 };
 
 void GameLogic::GravityBlockDown(PlayField &p, Tetri &block) {
+	if (&block == NULL || &p == NULL) {
+		return;
+	}
 	int t_x = block.get_x();
 	int t_y = block.get_y();
 
@@ -275,4 +298,16 @@ void GameLogic::GravityBlockDown(PlayField &p, Tetri &block) {
 			block.setLockTimer(0);
 		}
 	}
+}
+
+Uint64 GameLogic::getScore(void) {
+	return score;
+}
+
+Uint64 GameLogic::getLevel(void) {
+	return level;
+}
+
+Uint64 GameLogic::getLines(void) {
+	return lines_completed;
 }

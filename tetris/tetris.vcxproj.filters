@@ -33,21 +33,30 @@
     <ClCompile Include="BlockAnimator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tetri.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="BlockAnimator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayField.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogic.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockAnimator.h">
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tetri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextAnimator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

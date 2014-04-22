@@ -9,3 +9,7 @@ bool Animator::nextFrame(void) {
 	frame++;
 	return true;
 };
+
+void Animator::render(Renderer &r) {
+	return;
+}

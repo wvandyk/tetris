@@ -18,11 +18,7 @@ class BlockAnimator : public Animator {
 public:
 	BlockAnimator(int x, int y, int x2, int y2, int block);
 	bool nextFrame(void);
-	int get_x(void);
-	int get_y(void);
-	int get_w(void);
-	int get_h(void);
-	int get_block(void);
+	void render(Renderer &r);
 	~BlockAnimator();
 };
 

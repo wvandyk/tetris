@@ -4,6 +4,8 @@
 #include "Tetri.h"
 #include "Animator.h"
 
+class Animator;
+
 class GameLogic {
 private:
 	Uint64 lockTimeOut = 1600;
@@ -15,6 +17,8 @@ private:
 	Uint64 level = 0;
 	std::vector<int> blockbag;
 	std::vector<Animator *> *alist;
+	Tetri *nnextPiece = NULL;
+	Tetri *nextPiece = NULL;
 public:
 	GameLogic(std::vector<Animator *> &animlist);
 	bool adjustFit(PlayField &board, Tetri &block);
@@ -27,7 +31,12 @@ public:
 	void RotateBlockCW(PlayField &p, Tetri &block);
 	void RotateBlockCCW(PlayField &p, Tetri &block);
 	void GravityBlockDown(PlayField &p, Tetri &block);
+	Uint64 getScore(void);
+	Uint64 getLevel(void);
+	Uint64 getLines(void);
 	Tetri *nextBlock(void);
+	Tetri *drawPiece(void);
+	Tetri *getNextPiece(void);
 	int clearLines(PlayField &p);
 };
 

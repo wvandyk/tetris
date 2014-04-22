@@ -1,4 +1,5 @@
 #include "BlockAnimator.h"
+#include "Renderer.h"
 #include <iostream>
 
 BlockAnimator::BlockAnimator(int x, int y, int x2, int y2, int block) {
@@ -8,7 +9,6 @@ BlockAnimator::BlockAnimator(int x, int y, int x2, int y2, int block) {
 	this->x2 = x2 - centerx;
 	this->y2 = y2 - centery;
 	this->block = block;
-	std::cout << "TickTime: " << ticktime << std::endl;
 };
 
 bool BlockAnimator::nextFrame(void) {
@@ -19,7 +19,6 @@ bool BlockAnimator::nextFrame(void) {
 			(this->x + centerx >= 800) && (this->x2 + centerx >= 800) ||
 			(this->y + centery <= 0) && (this->y2 + centery <= 0) ||
 			(this->y + centery >= 768) && (this->y2 + centery >= 768) || z <= 100) {
-			std::cout << "Returning false" << std::endl;
 			return false;
 		}
 		else
@@ -35,25 +34,9 @@ bool BlockAnimator::nextFrame(void) {
 	return true;
 };
 
-BlockAnimator::~BlockAnimator() {
+void BlockAnimator::render(Renderer &r) {
+	r.renderBlock(x + centerx, y + centery, x2 - x, y2 - y, block - 1);
 }
 
-int BlockAnimator::get_x(void) {
-	return x + centerx;
-};
-
-int BlockAnimator::get_y(void) {
-	return y + centery;
-};
-
-int BlockAnimator::get_w(void) {
-	return x2 - x;
-};
-
-int BlockAnimator::get_h(void) {
-	return y2 - y;
-};
-
-int BlockAnimator::get_block(void) {
-	return block;
-};
+BlockAnimator::~BlockAnimator() {
+}
