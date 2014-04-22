@@ -24,6 +24,7 @@ class Renderer {
 	Uint64 framelength = 0;
 	TTF_Font *font;
 	SDL_Color orange, red, yellow, blue, violet, green, cyan, black, white;
+	std::vector<int> title;
 
 public:
 	Renderer(void);
@@ -43,6 +44,9 @@ public:
 	void renderAnimator(std::vector<Animator *> &animators);
 	void update(PlayField &p, Tetri &t, GameLogic &g, std::vector<Animator *> &animators);
 	void renderText(int x, int y, const char *text, SDL_Color &color);
+	void titleScreen(void);
+	void gameOverScreen(void);
+	void drawPlayfieldGrey(PlayField &p);
 	~Renderer(void);
 };
 

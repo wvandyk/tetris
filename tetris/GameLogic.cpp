@@ -43,11 +43,14 @@ int GameLogic::clearLines(PlayField &p) {
 		lcount = 0;
 	}
 	if (cleared > 0) {
+		
 		lines_completed = lines_completed + cleared;
-		score = score + (100 * cleared * cleared);
+		Uint64 line_score = (100 * cleared * cleared);
 		if (level > 0) {
-			score = score * level;
+			line_score = line_score * level;
 		}
+
+		score = score + line_score;
 		lines_to_level = lines_to_level - cleared;
 		if (lines_to_level <= 0) {
 			level++;
@@ -310,4 +313,25 @@ Uint64 GameLogic::getLevel(void) {
 
 Uint64 GameLogic::getLines(void) {
 	return lines_completed;
+}
+
+GameLogic::~GameLogic(void) {
+	if (nnextPiece != NULL) {
+		delete nnextPiece;
+	}
+}
+
+void GameLogic::reset(void) {
+	lastDrop = 0;
+	score = 0;
+	lines_completed = 0;
+	lines_to_level = 10;
+	level = 0;
+	lockTimeOut = 800;
+	dropTimeout = 440;
+	if (nnextPiece != NULL) {
+		delete nnextPiece;
+	}
+	nnextPiece = NULL;
+	nextPiece = drawPiece();
 }

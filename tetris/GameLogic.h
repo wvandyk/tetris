@@ -38,6 +38,8 @@ public:
 	Tetri *drawPiece(void);
 	Tetri *getNextPiece(void);
 	int clearLines(PlayField &p);
+	void reset(void);
+	~GameLogic(void);
 };
 
 #endif

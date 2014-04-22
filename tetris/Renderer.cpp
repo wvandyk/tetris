@@ -70,6 +70,32 @@ bool Renderer::sdl_initall() {
 };
 
 Renderer::Renderer(void) {
+	title = {
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 1, 1, 1, 0, 2, 2, 2, 0, 3, 3, 3, 0, 4, 4, 4, 0, 5, 0, 6, 6, 6, 0, 0,
+		0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 4, 0, 4, 0, 5, 0, 6, 0, 0, 0, 0,
+		0, 0, 0, 1, 0, 0, 2, 2, 2, 0, 0, 3, 0, 0, 4, 4, 4, 0, 5, 0, 6, 6, 6, 0, 0,
+		0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 4, 4, 0, 0, 5, 0, 0, 0, 6, 0, 0,
+		0, 0, 0, 1, 0, 0, 2, 2, 2, 0, 0, 3, 0, 0, 4, 0, 4, 0, 5, 0, 6, 6, 6, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	};
 	blocks.reserve(8);
 	blocks = { &irect, &jrect, &lrect, &orect, &srect, &trect, &zrect, &grect, &brect };
 	for (int x = 0; x < 9; x++) {
@@ -88,9 +114,7 @@ Renderer::Renderer(void) {
 	black = { 0, 0, 0 };
 	white = { 255, 255, 255 };
 
-	if (sdl_initall()) {
-		buildscr();
-	};
+	sdl_initall();
 }
 
 void Renderer::buildscr(void) {
@@ -128,6 +152,28 @@ void Renderer::drawplayfield(PlayField &p) {
 			t.h = 32;
 			int index = p.getBoardAt(x, y) - 1;
 			if (index == -1) { index = 8; }
+			SDL_RenderCopy(ren, tex, blocks[index], &t);
+		}
+	}
+}
+
+void Renderer::drawPlayfieldGrey(PlayField &p) {
+	for (int y = 0; y < 22; y++) {
+		for (int x = 0; x < 10; x++) {
+			SDL_Rect t;
+			t.x = x * 32 + 64;
+			t.y = y * 32;
+			t.w = 32;
+			t.h = 32;
+			int index = p.getBoardAt(x, y) - 1;
+			
+			if (index == -1) { 
+				index = 8; 
+			}
+			else 
+			{ 
+				index = 7; 
+			}
 			SDL_RenderCopy(ren, tex, blocks[index], &t);
 		}
 	}
@@ -201,16 +247,13 @@ void Renderer::update(PlayField &p, Tetri &t, GameLogic &g, std::vector<Animator
 	buildscr();
 	drawplayfield(p);
 	drawScoreArea();
-	//drawScore(g);
 	drawNextBlock(g);
 	drawScore(g);
 	drawLevel(g);
 	drawLines(g);
 	drawtetri(t);
-	//drawRawTetri(t, t.get_x(), t.get_y());
 	drawTopBorder();
 	renderAnimator(animators);
-	renderText(0, 0, "Tetris!", red);
 
 	SDL_RenderPresent(ren);
 
@@ -238,7 +281,7 @@ void Renderer::renderText(int x, int y, const char *text, SDL_Color &color) {
 		if (!text_texture) {
 			std::cout << "ERROR! " << SDL_GetError();
 		}
-		SDL_free(text_surface);
+		SDL_FreeSurface(text_surface);
 		SDL_RenderCopy(ren, text_texture, NULL, &text_rect);
 		SDL_DestroyTexture(text_texture);
 	}
@@ -281,7 +324,7 @@ void Renderer::drawScore(GameLogic &g) {
 	padTo(scoreString, 12, '0');
 	int x = 14 * 32 + 2;
 	int y = 7 * 32;
-	renderText(x, y, "Score:", white);
+	renderText(x, y, "SCOrE:", white);
 	y = 8 * 32;
 	renderText(x, y, scoreString.c_str(), white);
 }
@@ -293,7 +336,7 @@ void Renderer::drawLevel(GameLogic &g) {
 	padTo(levelString, 2, '0');
 	int x = 14 * 32 + 2;
 	int y = 10 * 32;
-	renderText(x, y, "Level:", white);
+	renderText(x, y, "LEVEL:", white);
 	y = 11 * 32;
 	renderText(x, y, levelString.c_str(), white);
 }
@@ -305,7 +348,7 @@ void Renderer::drawLines(GameLogic &g) {
 	padTo(linesString, 4, '0');
 	int x = 14 * 32 + 2;
 	int y = 13 * 32;
-	renderText(x, y, "Lines:", white);
+	renderText(x, y, "LINES:", white);
 	y = 14 * 32;
 	renderText(x, y, linesString.c_str(), white);
 }
@@ -314,9 +357,42 @@ void Renderer::drawNextBlock(GameLogic &g) {
 	int x = 14 * 32 + 2;
 	int y = 2 * 32;
 	Tetri *piece = g.getNextPiece();
-	renderText(x, y, "Next:", white);
+	renderText(x, y, "NEXT:", white);
 	y = 3 * 32;
 	drawRawTetri(*piece, 10 + piece->get_x(), 4 + piece->get_y());
+}
+
+void Renderer::titleScreen() {
+	int block;
+
+	
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderClear(ren);
+
+	for (int y = 0; y < 24; y++) {
+		for (int x = 0; x < 25; x++) {
+			SDL_Rect t;
+			t.x = x * 32;
+			t.y = y * 32;
+			t.w = 31;
+			t.h = 31;
+			block = title[x + y * 25];
+			if (block > 0) {
+				SDL_RenderCopy(ren, tex, blocks[block], &t);
+			}
+		}
+	}
+
+	renderText(7 * 32, 11 * 32, "BY WYNAND VAN DYK", green);
+	renderText(6 * 32, 13 * 32, "PrESS SPACE TO PLAY", white);
+	renderText(6 * 32, 15 * 32, "PrESS ESCAPE TO QUIT", white);
+	SDL_RenderPresent(ren);
+}
+
+void Renderer::gameOverScreen() {
+	renderText(4 * 32, 5 * 32, "GAME OVER!", red);
+	renderText(3 * 32, 7 * 32, "PrESS ESCAPE", blue);
+	SDL_RenderPresent(ren);
 }
 
 Renderer::~Renderer(void) {
