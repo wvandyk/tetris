@@ -1,18 +1,15 @@
-#ifndef __ANIMATOR__
-#define __ANIMATOR__
+#ifndef TETRIS_ANIMATOR_H_
+#define TETRIS_ANIMATOR_H_
 
 #include "Renderer.h"
 
 class Renderer;
 
 class Animator {
-	int frame = 0;
-	int frame_count = 10;
 public:
-	Animator();
-	virtual bool nextFrame(void);
-	virtual void render(Renderer &r);
-	virtual ~Animator() {};
+	virtual bool nextFrame() = 0;
+	virtual void render(Renderer &r) = 0;
+	virtual ~Animator() {}
 };
 
-#endif
+#endif // TETRIS_ANIMATOR_H_

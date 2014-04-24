@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -13,7 +16,7 @@
 
 
 int main(int argc, char **argv){
-
+	std::srand(std::time(NULL));
 	bool game_over = false;
 	bool playing = false;
 	Tetri *t = NULL;

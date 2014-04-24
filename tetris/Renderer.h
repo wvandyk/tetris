@@ -1,5 +1,5 @@
-#ifndef __RENDERER__
-#define __RENDERER__
+#ifndef TETRIS_RENDERER_H_
+#define TETRIS_RENDERER_H_
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -21,7 +21,7 @@ class Renderer {
 	std::string data_path;
 	SDL_Rect irect, jrect, lrect, orect, srect, trect, zrect, grect, brect;
 	std::vector<SDL_Rect *> blocks;
-	Uint64 framelength = 0;
+	Uint64 framelength;
 	TTF_Font *font;
 	SDL_Color orange, red, yellow, blue, violet, green, cyan, black, white;
 	std::vector<int> title;
@@ -50,4 +50,4 @@ public:
 	~Renderer(void);
 };
 
-#endif
+#endif // TETRIS_RENDERER_H_

@@ -5,21 +5,17 @@ bool PlayField::checkInBounds(int x, int y) {
 		return true;
 	}
 	return false;
-};
+}
 
 bool PlayField::boardEmptyAt(int x, int y) {
 	if (board[x + y * 10] == 0) {
 		return true;
 	}
 	return false;
-};
+}
 
-PlayField::PlayField() {
-	board.reserve(220);
-	for (int i = 0; i < 220; i++) {
-		board.push_back(0);
-	}
-};
+PlayField::PlayField() 
+  : board(220, 0) {}
 
 bool PlayField::setBoardAt(int x, int y, int val) {
 	int index = x + y * 10;
@@ -28,17 +24,17 @@ bool PlayField::setBoardAt(int x, int y, int val) {
 		return true;
 	}
 	return false;
-};
+}
 
 int PlayField::getBoardAt(int x, int y) {
 	int index = x + y * 10;
-	if (index < 220 && index > 0) {
+	if (index < 220 && index >= 0) {
 		return board[index];
 	}
 	return 0;
 }
 
-void PlayField::drawBoard(void) {
+void PlayField::drawBoard() {
 	for (int y = 0; y < 22; y++) {
 		for (int x = 0; x < 10; x++) {
 			std::cout << board[x + y * 10] << " ";
@@ -47,7 +43,7 @@ void PlayField::drawBoard(void) {
 	}
 };
 
-void PlayField::clearBoard(void) {
+void PlayField::clearBoard() {
 	for (int y = 0; y < 22; y++) {
 		for (int x = 0; x < 10; x++) {
 			board[x + y * 10] = 0;

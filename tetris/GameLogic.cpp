@@ -1,21 +1,17 @@
 #include "GameLogic.h"
-#include "Animator.h"
-#include "BlockAnimator.h"
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
 
-GameLogic::GameLogic(std::vector<Animator *> &animlist) {
-	lockTimeOut = 800;
-	dropTimeout = 440;
-	lastDrop = 0;
-	blockbag.reserve(7);
-	blockbag = { 1, 2, 3, 4, 5, 6, 7 };
-	std::srand(std::time(NULL));
-	alist = &animlist;
-	nnextPiece = NULL;
-	nextPiece = drawPiece();
-}
+GameLogic::GameLogic(std::vector<Animator *> &animlist) 
+: lockTimeOut(800),
+  dropTimeout(440),
+  lastDrop(0),
+  score(0),
+  lines_completed(0),
+  lines_to_level(10),
+  level(0),
+  blockbag({ 1, 2, 3, 4, 5, 6, 7 }),
+  alist(&animlist),
+  nnextPiece(NULL),
+  nextPiece(drawPiece()) {}
 
 int GameLogic::clearLines(PlayField &p) {
 	int lcount = 0;

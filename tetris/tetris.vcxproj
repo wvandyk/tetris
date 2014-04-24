@@ -119,7 +119,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BlockAnimator.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
@@ -134,7 +133,6 @@
     <ClInclude Include="PlayField.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Tetri.h" />
-    <ClInclude Include="TextAnimator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

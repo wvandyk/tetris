@@ -1,19 +1,23 @@
-#ifndef __BLOCK_ANIMATOR__
-#define __BLOCK_ANIMATOR__
-#include "Animator.h"
+#ifndef TETRIS_BLOCK_ANIMATOR_H_
+#define TETRIS_BLOCK_ANIMATOR_H_
+
+#include <iostream>
 #include <SDL.h>
+#include "Renderer.h"
+#include "Animator.h"
+
 
 class BlockAnimator : public Animator {
-	int z = 256;
-	int centerx = 4 * 32 + 64;
-	int centery = 0;
-	int x = 0;
-	int y = 0;
-	int x2 = 0;
-	int y2 = 0;
-	int block = 0;
-	Uint64 ticktime = 10;
-	Uint64 last_tick = SDL_GetTicks();
+	int z;
+	int centerx;
+	int centery;
+	int x;
+	int y;
+	int x2;
+	int y2;
+	int block;
+	Uint64 ticktime;
+	Uint64 last_tick;
 
 public:
 	BlockAnimator(int x, int y, int x2, int y2, int block);
@@ -22,4 +26,4 @@ public:
 	~BlockAnimator();
 };
 
-#endif
+#endif // TETRIS_BLOCK_ANIMATOR_H_

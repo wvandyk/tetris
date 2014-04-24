@@ -1,8 +1,9 @@
-#ifndef __GAMELOGIC__
-#define __GAMELOGIC__
+#ifndef TETRIS_GAMELOGIC_H_
+#define TETRIS_GAMELOGIC_H_
 #include "PlayField.h"
 #include "Tetri.h"
 #include "Animator.h"
+#include "BlockAnimator.h"
 
 class Animator;
 
@@ -42,4 +43,4 @@ public:
 	~GameLogic(void);
 };
 
-#endif
+#endif // TETRIS_GAMELOGIC_H_

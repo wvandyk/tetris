@@ -1,5 +1,5 @@
-#ifndef __TETRI__
-#define __TETRI__
+#ifndef TETRIS_TETRI_H_
+#define TETRIS_TETRI_H_
 #include <SDL.h>
 #include <string>
 #include <vector>
@@ -69,4 +69,4 @@ public:
 	Zblock();
 };
 
-#endif
+#endif // TETRIS_TETRI_H_
