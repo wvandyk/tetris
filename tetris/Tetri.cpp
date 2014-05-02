@@ -83,6 +83,10 @@ bool Tetri::getLocked(void) {
 	return locked;
 }
 
+Tetri::Tetri() {
+	locked = false;
+	lockTimer = 0;
+}
 
 Lblock::Lblock() {
 	frames = { 

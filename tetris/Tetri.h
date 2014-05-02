@@ -15,6 +15,7 @@ protected:
 	std::string color = "green";
 
 public:
+	Tetri();
 	void setLockTimer(Uint64 time);
 	Uint64 getLockTimer(void);
 	void setLocked(bool val);

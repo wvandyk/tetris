@@ -274,20 +274,21 @@ void GameLogic::GravityBlockDown(PlayField &p, Tetri &block) {
 	}
 	int t_x = block.get_x();
 	int t_y = block.get_y();
+        Uint64 curTicks = SDL_GetTicks();
 
-	if (SDL_GetTicks() - lastDrop >= dropTimeout) {
+	if (curTicks - lastDrop >= dropTimeout) {
 		block.set_y(t_y + 1);
-		lastDrop = SDL_GetTicks();
+		lastDrop = curTicks;
 
 		if (!adjustFit(p, block)) {
 			block.set_y(t_y);
 			block.set_x(t_x);
 			if (block.getLockTimer() == 0) {
-				block.setLockTimer(SDL_GetTicks());
+				block.setLockTimer(curTicks);
 			}
 			else 
 			{
-				if (SDL_GetTicks() - block.getLockTimer() >= lockTimeOut) {
+				if (curTicks - block.getLockTimer() >= lockTimeOut) {
 					block.setLocked(true);
 				}
 			}
