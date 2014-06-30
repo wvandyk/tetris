@@ -3,7 +3,6 @@ Tetris
 
 Tetris clone in C++ built in VS express 2013 with SDL 2
 This is a personal exercise in using SDL 2.0 and C++ with which I am inexperienced.
-I am using a few select C++11 features, mostly to get rid of initializer lists in class constructors.
 
 To compile this project, you will need SDL 2.0 + SDL_ttf 2.0 and VS Express 2013.
 While I have not tested it myself, there should be no reason for this project to not compile
